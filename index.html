@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property="og:title" content="My Portfolio" />
+<meta property="og:image" content="https://thrisha.github.io/portfolio/preview.png" />
+  <title>Portfolio • Pullayi Thrisha</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    html { scroll-behavior: smooth; }
+    
+    /* Enhanced scroll animations */
+    [data-animate] {
+      opacity: 0; 
+      transform: translateY(50px); 
+      transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    }
+    [data-animate].visible { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+    
+    [data-animate-left] { 
+      opacity: 0; 
+      transform: translateX(-50px); 
+      transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    }
+    [data-animate-left].visible { 
+      opacity: 1; 
+      transform: translateX(0); 
+    }
+    
+    [data-animate-right] { 
+      opacity: 0; 
+      transform: translateX(50px); 
+      transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    }
+    [data-animate-right].visible { 
+      opacity: 1; 
+      transform: translateX(0); 
+    }
+
+    [data-animate-scale] { 
+      opacity: 0; 
+      transform: scale(0.8); 
+      transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    }
+    [data-animate-scale].visible { 
+      opacity: 1; 
+      transform: scale(1); 
+    }
+
+    /* Mobile menu animation */
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-out;
+    }
+    
+    .mobile-menu.open {
+      max-height: 300px;
+    }
+
+    /* Skills Container - Desktop */
+    .skills-container {
+      position: relative;
+      min-height: 420px;
+      background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    /* Floating bubbles - Desktop */
+    .skill-bubble {
+      position: absolute;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      animation: float 6s ease-in-out infinite;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .skill-bubble:hover {
+      transform: scale(1.1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      z-index: 10;
+    }
+
+    .skill-bubble span {
+      text-align: center;
+      font-size: 0.85rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .skill-bubble .percentage {
+      font-size: 1.1rem;
+      margin-top: 2px;
+    }
+
+    /* Different bubble sizes and animations */
+    .bubble-large {
+      width: 120px;
+      height: 120px;
+      animation-duration: 8s;
+    }
+
+    .bubble-medium {
+      width: 100px;
+      height: 100px;
+      animation-duration: 7s;
+    }
+
+    .bubble-small {
+      width: 90px;
+      height: 90px;
+      animation-duration: 6s;
+    }
+
+    /* Floating animations with different delays */
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-10px) rotate(1deg); }
+      50% { transform: translateY(-5px) rotate(-1deg); }
+      75% { transform: translateY(-15px) rotate(0.5deg); }
+    }
+
+    .float-delay-1 { animation-delay: 0s; }
+    .float-delay-2 { animation-delay: 1s; }
+    .float-delay-3 { animation-delay: 2s; }
+    .float-delay-4 { animation-delay: 3s; }
+    .float-delay-5 { animation-delay: 4s; }
+    .float-delay-6 { animation-delay: 5s; }
+    .float-delay-7 { animation-delay: 1.5s; }
+    .float-delay-9 { animation-delay: 3.5s; }
+    .float-delay-10 { animation-delay: 4.5s; }
+    .float-delay-11 { animation-delay: 0.5s; }
+    .float-delay-12 { animation-delay: 6.5s; }
+    .float-delay-13 { animation-delay: 7.5s; }
+
+    /* Background particles */
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(56, 189, 248, 0.3);
+      border-radius: 50%;
+      animation: particle-float 15s linear infinite;
+    }
+
+    @keyframes particle-float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Gradient animations */
+    .gradient-bg {
+      background: linear-gradient(45deg, #3b82f6, #10b981, #8b5cf6, #f59e0b);
+      background-size: 300% 300%;
+      animation: gradient-shift 8s ease infinite;
+    }
+
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Stagger animations */
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+    .stagger-5 { animation-delay: 0.5s; }
+    .stagger-6 { animation-delay: 0.6s; }
+    
+    /* Project name font size increased */
+    .project-name {
+      font-size: 1.5rem;
+    }
+    
+    /* Education section dots positioning fix */
+    .education-timeline {
+      position: relative;
+      border-left: 4px solid #38bdf8;
+      margin-left: 2rem;
+      padding-left: 1.5rem;
+    }
+    
+    .education-item {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+    
+    .education-dot {
+      position: absolute;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      left: -2.6rem;
+      top: 0.5rem;
+      z-index: 10;
+    }
+
+
+    
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      /* Header */
+      header {
+        padding: 0.5rem;
+      }
+      
+      /* Mobile menu button */
+      .mobile-menu-button {
+        display: block;
+      }
+      
+      /* Hide desktop nav on mobile */
+      .desktop-nav {
+        display: none;
+      }
+      
+      /* Hero section */
+      #home h1 {
+        font-size: 2.5rem;
+      }
+      
+      #home p {
+        font-size: 1rem;
+      }
+      
+      /* Skills container - Mobile adjustments while keeping floating bubbles */
+      .skills-container {
+        min-height: 350px; /* Reduced height for mobile */
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+        border-radius: 16px; /* Smaller border radius */
+        overflow: hidden;
+      }
+
+      /* Adjust bubble sizes for mobile */
+      .bubble-large {
+        width: 70px;
+        height: 70px;
+        animation-duration: 8s;
+      }
+
+      .bubble-medium {
+        width: 60px;
+        height: 60px;
+        animation-duration: 7s;
+      }
+
+      .bubble-small {
+        width: 50px;
+        height: 50px;
+        animation-duration: 6s;
+      }
+
+      /* Adjust font sizes inside bubbles for mobile */
+      .skill-bubble span {
+        text-align: center;
+        font-size: 0.6rem;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .skill-bubble .percentage {
+        font-size: 0.7rem;
+        margin-top: 1px;
+      }
+
+      /* Adjust bubble positions for mobile - better fit */
+      .skill-bubble[style*="top: 20%; left: 10%"] { top: 15% !important; left: 8% !important; }
+      .skill-bubble[style*="top: 15%; left: 75%"] { top: 12% !important; left: 72% !important; }
+      .skill-bubble[style*="top: 45%; left: 5%"] { top: 40% !important; left: 5% !important; }
+      .skill-bubble[style*="top: 35%; left: 40%"] { top: 30% !important; left: 35% !important; }
+      .skill-bubble[style*="top: 50%; left: 85%"] { top: 45% !important; left: 78% !important; }
+      .skill-bubble[style*="top: 35%; left: 15%"] { top: 55% !important; left: 12% !important; }
+      .skill-bubble[style*="top: 65%; left: 70%"] { top: 60% !important; left: 65% !important; }
+      .skill-bubble[style*="top: 10%; left: 50%"] { top: 8% !important; left: 45% !important; }
+      .skill-bubble[style*="top: 80%; left: 15%"] { top: 75% !important; left: 12% !important; }
+      .skill-bubble[style*="top: 5%; left: 30%"] { top: 25% !important; left: 62% !important; }
+      .skill-bubble[style*="top: 70%; left: 25%"] { top: 65% !important; left: 28% !important; }
+      .skill-bubble[style*="top: 55%; left: 45%"] { top: 80% !important; left: 40% !important; }
+      .skill-bubble[style*="top: 25%; right: 5%"] { top: 35% !important; right: 5% !important; }
+
+      /* Reduce particle size for mobile */
+      .particle {
+        width: 2px;
+        height: 2px;
+      }
+      
+      /* Projects */
+      .project-name {
+        font-size: 1.3rem;
+      }
+      
+      /* Education */
+      .education-timeline {
+        margin-left: 1rem;
+        padding-left: 1rem;
+      }
+      
+      .education-dot {
+        left: -1.8rem;
+      }
+      
+      /* Connect section */
+      #connect .flex {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      /* General text sizing */
+      h2 {
+        font-size: 2rem;
+      }
+      
+      p, span {
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (min-width: 769px) {
+      /* Hide mobile menu button on desktop */
+      .mobile-menu-button {
+        display: none;
+      }
+      
+      /* Show desktop nav on desktop */
+      .desktop-nav {
+        display: flex;
+      }
+      
+      /* Hide mobile menu on desktop */
+      .mobile-menu {
+        display: none;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      /* Further adjustments for very small screens */
+      #home h1 {
+        font-size: 2rem;
+      }
+      
+      /* Skills container - Even more compact for small screens */
+      .skills-container {
+        min-height: 280px; /* More compact height */
+        border-radius: 12px;
+      }
+
+      /* Even smaller bubbles for very small screens */
+      .bubble-large {
+        width: 55px;
+        height: 55px;
+      }
+
+      .bubble-medium {
+        width: 48px;
+        height: 48px;
+      }
+
+      .bubble-small {
+        width: 42px;
+        height: 42px;
+      }
+
+      /* Smaller fonts for tiny screens */
+      .skill-bubble span {
+        font-size: 0.5rem;
+      }
+
+      .skill-bubble .percentage {
+        font-size: 0.6rem;
+      }
+
+      /* Tighter positioning for small screens */
+      .skill-bubble[style*="top: 15%; left: 8%"] { top: 12% !important; left: 6% !important; }
+      .skill-bubble[style*="top: 12%; left: 72%"] { top: 10% !important; left: 68% !important; }
+      .skill-bubble[style*="top: 40%; left: 5%"] { top: 35% !important; left: 4% !important; }
+      .skill-bubble[style*="top: 30%; left: 35%"] { top: 28% !important; left: 32% !important; }
+      .skill-bubble[style*="top: 45%; left: 78%"] { top: 42% !important; left: 74% !important; }
+      .skill-bubble[style*="top: 55%; left: 12%"] { top: 52% !important; left: 8% !important; }
+      .skill-bubble[style*="top: 60%; left: 65%"] { top: 58% !important; left: 62% !important; }
+      .skill-bubble[style*="top: 8%; left: 45%"] { top: 6% !important; left: 42% !important; }
+      .skill-bubble[style*="top: 75%; left: 12%"] { top: 72% !important; left: 8% !important; }
+      .skill-bubble[style*="top: 25%; left: 62%"] { top: 22% !important; left: 58% !important; }
+      .skill-bubble[style*="top: 65%; left: 28%"] { top: 62% !important; left: 25% !important; }
+      .skill-bubble[style*="top: 80%; left: 40%"] { top: 78% !important; left: 36% !important; }
+      .skill-bubble[style*="top: 35%; right: 5%"] { top: 32% !important; right: 4% !important; }
+      
+      .project-name {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans">
+  <!-- Header -->
+  <header class="sticky top-0 bg-gray-900/80 backdrop-blur border-b border-gray-800 z-50">
+    <div class="max-w-6xl mx-auto flex items-center justify-between p-4">
+      <a href="#home" class="flex items-center gap-2 font-bold text-lg" data-animate-left> </a>
+      
+      <!-- Desktop Navigation -->
+      <nav class="desktop-nav items-center gap-6" data-animate-right>
+        <a href="#about" class="hover:text-sky-400 transition-colors duration-300">About</a>
+        <a href="#skills" class="hover:text-sky-400 transition-colors duration-300">Skills</a>
+        <a href="#projects" class="hover:text-sky-400 transition-colors duration-300">Projects</a>
+        <a href="#education" class="hover:text-sky-400 transition-colors duration-300">Education</a>
+        <a href="#connect" class="hover:text-sky-400 transition-colors duration-300">Connect</a>
+      </nav>
+      
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-button text-sky-400 focus:outline-none" id="menu-toggle">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu (Hidden by default) -->
+    <div class="mobile-menu bg-gray-900 border-t border-gray-800" id="mobile-menu">
+      <div class="flex flex-col p-4 space-y-4">
+        <a href="#about" class="hover:text-sky-400 transition-colors duration-300 py-2">About</a>
+        <a href="#skills" class="hover:text-sky-400 transition-colors duration-300 py-2">Skills</a>
+        <a href="#projects" class="hover:text-sky-400 transition-colors duration-300 py-2">Projects</a>
+        <a href="#education" class="hover:text-sky-400 transition-colors duration-300 py-2">Education</a>
+        <a href="#connect" class="hover:text-sky-400 transition-colors duration-300 py-2">Connect</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main id="home" class="max-w-6xl mx-auto p-6">
+    <section class="grid md:grid-cols-2 gap-10 py-16">
+      <div data-animate-left>
+        <h1 class="text-4xl md:text-6xl font-extrabold mt-4">Hi, I'm <span class="bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">Pullayi Thrisha</span>.</h1>
+        <p class="mt-2 text-sky-300 font-semibold">Web Developer | Tech Enthusiast | IEEE CS Chair | Open Source Contributor | Ex-NCC Cadet</p>
+        <p class="mt-4 text-gray-400 text-lg">A passionate CSE student exploring Java, Python, Web Dev, and DSA. I love coding, hackathons, and building meaningful projects.</p>
+        <div class="flex flex-wrap gap-4 mt-6">
+          <!-- Removed "View Projects" button as requested -->
+        </div>
+      </div>
+      <div class="bg-gray-800 rounded-2xl p-6" data-animate-right>
+        <img src="thrishaa.jpeg" alt="Profile" class="rounded-xl w-full h-full object-cover">
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-16" data-animate>
+      <h2 class="text-3xl font-bold mb-4">About Me</h2>
+      <p class="text-gray-400 mb-6">I am Pullayi Thrisha, currently in my 3rd year of B.Tech in CSE. A lateral entry student through ECET, I love solving problems, participating in hackathons,Workshops and learning new technologies. Along with academics, I am an NCC cadet holding B & C certificates, which instilled discipline, Leadership and teamwork in me. My goal is to become a skilled software engineer, create impactful solutions, and leverage technology to make a meaningful difference in people’s lives🚀.</p>
+    </section>
+
+    <!-- Skills with Animated Bubbles (Desktop) and Grid (Mobile) -->
+    <section id="skills" class="py-16" data-animate>
+      <h2 class="text-3xl font-bold mb-10 text-center">Skills</h2>
+      
+      <!-- Desktop Skills Container -->
+      <div class="skills-container relative">
+        <!-- Background particles -->
+        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+        <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
+        <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
+        <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 1s;"></div>
+
+        <!-- Floating skill bubbles -->
+        <div class="skill-bubble bubble-large float-delay-1 stagger-1" 
+             style="top: 20%; left: 10%; background: linear-gradient(135deg, #007396, #f89820);">
+          <span>Java</span>
+          <span class="percentage">85%</span>
+        </div>
+
+        <div class="skill-bubble bubble-medium float-delay-2 stagger-2" 
+             style="top: 15%; left: 75%; background: linear-gradient(135deg, #3776ab, #ffd43b);">
+          <span>Python</span>
+          <span class="percentage">80%</span>
+        </div>
+
+        <div class="skill-bubble bubble-small float-delay-3 stagger-3" 
+             style="top: 45%; left: 5%; background: linear-gradient(135deg, #00599c, #004482);">
+          <span>C</span>
+          <span class="percentage">75%</span>
+        </div>
+
+        <div class="skill-bubble bubble-large float-delay-4 stagger-4" 
+             style="top: 35%; left: 40%; background: linear-gradient(135deg, #e34c26, #264de4);">
+          <span>HTML</span>
+          <span class="percentage">92%</span>
+        </div>
+
+        <div class="skill-bubble bubble-medium float-delay-12 stagger-6" 
+             style="top: 50%; left: 85%; background: linear-gradient(135deg, #264de4, #2965f1);">
+          <span>CSS</span>
+          <span class="percentage">88%</span>
+        </div>
+
+        <div class="skill-bubble bubble-small float-delay-13 stagger-1" 
+             style="top: 35%; left: 15%; background: linear-gradient(135deg, #f7df1e, #000000);">
+          <span>JavaScript</span>
+          <span class="percentage">85%</span>
+        </div>
+
+        <div class="skill-bubble bubble-medium float-delay-5 stagger-5" 
+             style="top: 65%; left: 70%; background: linear-gradient(135deg, #61dafb, #20232a);">
+          <span>React</span>
+          <span class="percentage">75%</span>
+        </div>
+
+        <div class="skill-bubble bubble-small float-delay-9 stagger-3" 
+             style="top: 10%; left: 50%; background: linear-gradient(135deg, #4db33d, #3f9a2c);">
+          <span>MongoDB</span>
+          <span class="percentage">70%</span>
+        </div>
+
+        <div class="skill-bubble bubble-medium float-delay-10 stagger-4" 
+             style="top: 80%; left: 15%; background: linear-gradient(135deg, #68a063, #215732);">
+          <span>Node.js</span>
+          <span class="percentage">72%</span>
+        </div>
+
+        <div class="skill-bubble bubble-small float-delay-11 stagger-5" 
+             style="top: 5%; left: 30%; background: linear-gradient(135deg, #ffffff, #000000);">
+          <span>Express</span>
+          <span class="percentage">68%</span>
+        </div>
+
+        <div class="skill-bubble bubble-small float-delay-6 stagger-6" 
+             style="top: 70%; left: 25%; background: linear-gradient(135deg, #336791, #4479a1);">
+          <span>SQL</span>
+          <span class="percentage">80%</span>
+        </div>
+
+        <div class="skill-bubble bubble-medium float-delay-7 stagger-1" 
+             style="top: 55%; left: 45%; background: linear-gradient(135deg, #f05032, #24292e);">
+          <span>GitHub</span>
+          <span class="percentage">85%</span>
+        </div>
+
+        <div class="skill-bubble bubble-large float-delay-8 stagger-2" 
+             style="top: 25%; right: 5%; background: linear-gradient(135deg, #ff6b6b, #4ecdc4);">
+          <span>DSA</span>
+          <span class="percentage">75%</span>
+        </div>
+      </div>
+
+      
+
+    <!-- Projects -->
+    <section id="projects" class="py-16" data-animate>
+      <h2 class="text-3xl font-bold mb-4">Projects</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-gray-800 rounded-2xl overflow-hidden transform hover:scale-105 transition-all duration-300" data-animate-scale>
+          <div class="bg-gradient-to-r from-sky-400/30 to-emerald-400/30 h-40 flex items-center justify-center">
+            <h3 class="project-name font-bold text-center">Anime Trivia Showdown</h3>
+          </div>
+          <div class="p-4">
+            <p class="text-gray-300 mb-3">Anime-themed quiz game with HTML, CSS, JS, and Python backend. Features leaderboard and timer.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-gradient-to-r from-sky-600 to-sky-800 rounded-full text-xs font-medium text-white shadow-sm">HTML</span>
+              <span class="px-3 py-1 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full text-xs font-medium text-white shadow-sm">CSS</span>
+              <span class="px-3 py-1 bg-gradient-to-r from-amber-500 to-amber-700 rounded-full text-xs font-medium text-black shadow-sm">JavaScript</span>
+              <span class="px-3 py-1 bg-gradient-to-r from-blue-700 to-blue-900 rounded-full text-xs font-medium text-white shadow-sm">Python</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-gray-800 rounded-2xl overflow-hidden transform hover:scale-105 transition-all duration-300" data-animate-scale>
+          <div class="bg-gradient-to-r from-sky-400/30 to-emerald-400/30 h-40 flex items-center justify-center">
+            <h3 class="project-name font-bold text-center">EduBot</h3>
+          </div>
+          <div class="p-4">
+            <p class="text-gray-300 mb-3">An AI chatbot built using React and Python to answer educational queries interactively.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-gradient-to-r from-sky-600 to-sky-800 rounded-full text-xs font-medium text-white shadow-sm">React</span>
+              <span class="px-3 py-1 bg-gradient-to-r from-blue-700 to-blue-900 rounded-full text-xs font-medium text-white shadow-sm">Python</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-gray-800 rounded-2xl overflow-hidden transform hover:scale-105 transition-all duration-300" data-animate-scale>
+          <div class="bg-gradient-to-r from-sky-400/30 to-emerald-400/30 h-40 flex items-center justify-center">
+            <h3 class="project-name font-bold text-center">Student Management System</h3>
+          </div>
+          <div class="p-4">
+            <p class="text-gray-300 mb-3">Full-stack system using the MERN stack for managing student data, attendance, and performance.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-gradient-to-r from-green-600 to-green-800 rounded-full text-xs font-medium text-white shadow-sm">MongoDB</span>
+              <span class="px-3 py-1 bg-gradient-to-r from-slate-600 to-slate-800 rounded-full text-xs font-medium text-white shadow-sm">Express</span>
+              <span class="px-3 py-1 bg-gradient-to-r from-sky-600 to-sky-800 rounded-full text-xs font-medium text-white shadow-sm">React</span>
+              <span class="px-3 py-1 bg-gradient-to-r from-green-700 to-green-900 rounded-full text-xs font-medium text-white shadow-sm">Node.js</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="py-16 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl px-6" data-animate>
+      <h2 class="text-3xl font-bold mb-10 text-center">Education</h2>
+      <div class="education-timeline max-w-3xl mx-auto">
+        <div class="education-item" data-animate-left>
+          <div class="education-dot bg-gradient-to-r from-sky-400 to-blue-500 shadow-lg"></div>
+          <div class="bg-gradient-to-r from-slate-800/60 to-slate-700/40 backdrop-blur rounded-xl p-6 border border-slate-600/30 shadow-xl">
+            <h3 class="text-2xl font-bold bg-gradient-to-r from-sky-300 to-blue-400 bg-clip-text text-transparent">Bachelor of Engineering in Computer Science</h3>
+            <p class="text-sky-300 font-semibold text-lg mt-1">Chaitanya Bharathi Institute of Technology</p>
+            <p class="text-slate-300 mt-2 font-medium">CGPA: 9.01 </p>
+            <p class="text-slate-300 mt-2 font-medium">2024 - 2027</p>
+            <p class="text-slate-400 text-sm mt-3 leading-relaxed">Currently pursuing B.E. in Computer Science with focus on software development, data structures, algorithms, and emerging technologies.</p>
+          </div>
+        </div>
+        
+        <div class="education-item" data-animate-right>
+          <div class="education-dot bg-gradient-to-r from-emerald-400 to-green-500 shadow-lg"></div>
+          <div class="bg-gradient-to-r from-slate-800/60 to-slate-700/40 backdrop-blur rounded-xl p-6 border border-slate-600/30 shadow-xl">
+            <h3 class="text-2xl font-bold bg-gradient-to-r from-emerald-300 to-green-400 bg-clip-text text-transparent">Diploma in Engineering</h3>
+            <p class="text-emerald-300 font-semibold text-lg mt-1">Government Polytechnic, Hyderabad</p>
+            <p class="text-slate-300 mt-2 font-medium">CGPA: 9.69 </p>
+            <p class="text-slate-300 mt-2 font-medium">2019 - 2022</p>
+            <p class="text-slate-400 text-sm mt-3 leading-relaxed">Completed diploma with excellent academic performance also achieved NCC B & C certificates and secured 58 rank ECET for direct admission into B.E. program.</p>
+          </div>
+        </div>
+        
+        <div class="education-item" data-animate-left>
+          <div class="education-dot bg-gradient-to-r from-pink-400 to-purple-500 shadow-lg"></div>
+          <div class="bg-gradient-to-r from-slate-800/60 to-slate-700/40 backdrop-blur rounded-xl p-6 border border-slate-600/30 shadow-xl">
+            <h3 class="text-2xl font-bold bg-gradient-to-r from-pink-300 to-purple-400 bg-clip-text text-transparent">Higher Secondary Education</h3>
+            <p class="text-purple-300 font-semibold text-lg mt-1">Medha Moral School, Nirmal</p>
+            <p class="text-slate-300 mt-2 font-medium">GPA: 10.0</p>
+            <p class="text-slate-300 mt-2 font-medium">2020-2021</p>
+            <p class="text-slate-400 text-sm mt-3 leading-relaxed">Achieved perfect GPA with few  extracurricular activities.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Connect With Me -->
+    <section id="connect" class="py-16" data-animate>
+      <h2 class="text-3xl font-bold mb-8 text-center">Connect With Me</h2>
+      <div class="flex justify-center gap-6">
+        <a href="https://www.linkedin.com/in/pullayithrisha/" target="_blank" 
+           class="group bg-gradient-to-r from-blue-600 to-blue-800 rounded-full p-4 hover:scale-110 transition-all duration-300 shadow-lg">
+          <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+
+        <a href="https://github.com/pullayithrisha" target="_blank" 
+           class="group bg-gradient-to-r from-gray-800 to-gray-900 rounded-full p-4 hover:scale-110 transition-all duration-300 shadow-lg">
+          <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+        </a>
+
+        <a href="mailto:pullayithrisha@gmail.com" 
+           class="group bg-gradient-to-r from-emerald-600 to-emerald-800 rounded-full p-4 hover:scale-110 transition-all duration-300 shadow-lg">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    
+  </main>
+
+  <footer class="border-t border-gray-800 py-6 text-center text-gray-400" data-animate>
+    © <span></span> Pullayi Thrisha
+  </footer>
+
+  <script>
+    // Mobile menu toggle functionality
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+    
+    // Close menu when clicking on a link
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // Enhanced scroll animation observer
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        } else {
+          // Reset animation when element leaves viewport
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animated elements
+    document.querySelectorAll('[data-animate], [data-animate-left], [data-animate-right], [data-animate-scale]').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Add dynamic interaction to skill bubbles (desktop only)
+    document.querySelectorAll('.skill-bubble').forEach(bubble => {
+      bubble.addEventListener('mouseenter', () => {
+        bubble.style.animationPlayState = 'paused';
+      });
+      
+      bubble.addEventListener('mouseleave', () => {
+        bubble.style.animationPlayState = 'running';
+      });
+      
+      bubble.addEventListener('click', () => {
+        bubble.style.transform = 'scale(1.2)';
+        setTimeout(() => {
+          bubble.style.transform = '';
+        }, 200);
+      });
+    });
+
+    // Add hover effects to mobile skill cards
+    document.querySelectorAll('.mobile-skill-card').forEach(card => {
+      card.addEventListener('click', () => {
+        card.style.transform = 'translateY(-10px) scale(1.05)';
+        setTimeout(() => {
+          card.style.transform = '';
+        }, 300);
+      });
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
